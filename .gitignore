@@ -1,0 +1,23 @@
+# environment
+.env
+
+# compiled python
+*.pyc
+__pycache__/
+
+# virtual directory
+venv/
+.venv/
+
+# IDE setting
+.idea/
+.vscode/
+
+#build
+dist/
+build/
+*.egg-info/
+
+# Windows
+Thumbs.db
+desktop.ini
