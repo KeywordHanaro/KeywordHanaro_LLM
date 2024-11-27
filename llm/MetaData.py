@@ -87,4 +87,4 @@ def getTopMeta(user_query):
     # for record in ranked_records:
     #     print(f"IDX: {record['idx']}, Title: {record['title']}, Similarity: {record['similarity_score']:.4f}")
     # return ranked_records
-    return highest_record['title']
+    return highest_record
