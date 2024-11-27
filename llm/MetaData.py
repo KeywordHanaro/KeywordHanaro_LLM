@@ -1,10 +1,10 @@
 import json
 import os
-from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.metrics.pairwise import cosine_similarity
 import re
 from Levenshtein import distance as levenshtein_distance
 import statistics
+
+
 
 def preprocess_text(text):
     """
@@ -48,7 +48,7 @@ def calculate_similarity(query1, query2):
 
 def getTopMeta(user_query):
     # JSON 파일들이 저장된 디렉토리 경로
-    directory_path = '../doc/metadata'
+    directory_path = './doc/metadata'
 
     # JSON 데이터를 저장할 리스트
     json_data = []
@@ -79,9 +79,12 @@ def getTopMeta(user_query):
         record['similarity_score'] = score['similarity']
     #
     # 유사도 점수를 기준으로 정렬 (내림차순)
-    ranked_records = sorted(json_data, key=lambda x: x['similarity_score'], reverse=True)
+    # ranked_records = sorted(json_data, key=lambda x: x['similarity_score'], reverse=True)
+    # 유사도 점수 가장 높은 기록
+    highest_record = max(json_data, key=lambda x: x['similarity_score'])
 
     # 출력 결과
     # for record in ranked_records:
     #     print(f"IDX: {record['idx']}, Title: {record['title']}, Similarity: {record['similarity_score']:.4f}")
-    print(ranked_records)
+    # return ranked_records
+    return highest_record['title']
