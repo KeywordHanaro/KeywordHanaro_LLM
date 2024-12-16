@@ -10,7 +10,7 @@ from llm.RAG_LLM import getAnswer
 from dto import *
 
 # /getInfo 경로에 대한 GET 요청 처리
-@app.get("/getInfo")
+@app.get("/llm/getInfo")
 async def get_info():
     # 반환할 JSON 데이터
     return {
@@ -19,7 +19,7 @@ async def get_info():
         "data": "Defying Gravity"
     }
 
-@app.post("/chat" , response_model=QueryResponse)
+@app.post("llm/chat" , response_model=QueryResponse)
 async def chat(request: QueryRequest):
     print(request.query)
     user_query = request.query
