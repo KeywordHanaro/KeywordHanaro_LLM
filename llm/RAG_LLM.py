@@ -26,7 +26,7 @@ def format_docs(docs):
 def getAnswer(user_query):
     metaData = getTopMeta(user_query)
     if metaData["similarity_score"] <0.05:
-        return "유사도 에러"
+        return 0
     filePath = f"./doc/{metaData['contents_type']}/{metaData['category']}/{metaData['fileName']}.pdf"
     loader = PyPDFLoader(filePath)
     docs = loader.load_and_split()
@@ -38,13 +38,16 @@ def getAnswer(user_query):
     retriever = vectorstore.as_retriever()
 
     prompt = hub.pull("rlm/rag-prompt")
+    prompt = prompt+("You are the bank teller"
+                     "You must answer the question in korean only"
+                     "You have to provide information about the product even if the customer just tells you the name of the product.")
 
     class StreamCallback(BaseCallbackHandler):
         def on_llm_new_token(self, token: str, **kwargs):
             print(token, end="", flush=True)
 
     llm = ChatOpenAI(
-        model_name="gpt-3.5-turbo",
+        model_name="gpt-4o",
         temperature=0,
         streaming=True,
         callbacks=[StreamCallback()],

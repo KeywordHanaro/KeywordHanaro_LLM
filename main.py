@@ -24,6 +24,8 @@ async def chat(request: QueryRequest):
     print(request.query)
     user_query = request.query
     answer = getAnswer(user_query)
+    if answer == 0:
+        return QueryResponse(query=user_query, answer="대답이 불가능한 질문입니다. 하나은행 상품에 대한 질문을 해주세요.")
     return QueryResponse(query=user_query, answer=answer)
     # print("hi")
 
