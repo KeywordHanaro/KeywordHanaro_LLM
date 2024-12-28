@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 
 #실행
-#python -m uvicorn main:app --host 172.16.20.209 --port 81
+#python -m uvicorn main:app --host 127.0.0.1 --port 81
 
 # FastAPI 애플리케이션 생성
 app = FastAPI()
@@ -19,7 +19,7 @@ async def get_info():
         "data": "Defying Gravity"
     }
 
-@app.post("llm/chat" , response_model=QueryResponse)
+@app.post("/llm/chat" , response_model=QueryResponse)
 async def chat(request: QueryRequest):
     print(request.query)
     user_query = request.query
